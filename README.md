@@ -7,8 +7,8 @@ Initial Features:
 * Registration
 * Search
 * Add
-* and Buy
+* Buy
 
-The website: http://automationpractice.com
+Link for the Application under test: http://automationpractice.com
 
 Frameworks: Capybara, RSPec, Site Prism and Faker
