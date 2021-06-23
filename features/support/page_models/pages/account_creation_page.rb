@@ -43,7 +43,7 @@ module PageModels
         end
         
         def fill_password
-            password.set('password')
+            password.set('123456')
         end
 
         def choose_title
@@ -51,9 +51,9 @@ module PageModels
         end
         
         def select_birth_date
-            birthday_day.select('day')
-            birthday_month.select('month')
-            birthday_year.select('year')
+            birthday_day.select('24')
+            birthday_month.select('April')
+            birthday_year.select('1981')
         end
        
         def fill_address

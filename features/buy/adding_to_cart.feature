@@ -3,7 +3,7 @@ Feature: Customer adding product to Cart
               I should be able to add a product to my Cart
               So that I can buy it later
 
-        @adding
+        @adding @regression @smoke
         Scenario Outline: First time user adding product to cart
             Given I have found a <product> on the search results that I want to buy
               And I add this product to my Cart
@@ -14,7 +14,7 @@ Feature: Customer adding product to Cart
                   | product |
                   | dress   |
         
-        @adding
+        @adding @regression @smoke
         Scenario: Existing user adding a product to cart
             Given I am signed in
               And I have found a product that I want to buy

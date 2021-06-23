@@ -3,10 +3,10 @@ Given("I am on the Authentication page") do
     home_page.go_to_authentication_page
 end
 
-# Login steps 
+# Login steps - happy path
 When("I enter valid sign in credentials") do
-    authentication_page.sign_in_with_valid_email
-    authentication_page.sign_in_with_valid_password
+    authentication_page.sign_in_with_valid_email(email)
+    authentication_page.sign_in_with_valid_password(password)
  end
  
  When("I click on sign in button") do
@@ -16,6 +16,27 @@ When("I enter valid sign in credentials") do
  Then("I am successfully signed in") do
      authentication_page.confirm_user_signed_in
  end
+ 
+ # Login steps - none or invalid credentials
+  Given("I enter no email address") do
+    puts "no email address"
+  end
+
+  Given(/^I enter a (.*?)$/) do |valid_email|
+    authentication_page.sign_in_with_valid_email(valid_email)
+  end
+
+  Given(/^I enter an (.*?)$/) do |invalid_email|
+    authentication_page.try_sign_in_with_invalid_email(invalid_email)
+  end
+
+  Then(/^the following (.*?) is displayed$/) do |warning_message|
+    authentication_page.check_invalid_email_warning_message(warning_message)
+  end
+  
+  Then("login is not completed") do
+    puts "No login"
+  end
 
 # Create an account steps
 Given("I am a guest user") do

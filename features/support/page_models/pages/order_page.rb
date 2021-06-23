@@ -41,7 +41,6 @@ module PageModels
         def click_to_agree_to_the_terms_of_service
             within(find('.checkbox')) do
             agree_to_the_terms_of_service.click
-
             end
         end
 

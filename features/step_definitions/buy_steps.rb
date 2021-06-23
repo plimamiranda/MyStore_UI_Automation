@@ -1,7 +1,7 @@
 Given("I am signed in") do
     home_page.go_to_home_page
     home_page.go_to_authentication_page
-    authentication_page.perform_login   
+    authentication_page.perform_login(email,password)   
 end
 
 Given(/^I have found a (.*?) on the search results that I want to buy$/) do |product|
@@ -33,7 +33,6 @@ Given("I choose a product that I want to buy") do
     category_page.mouse_over_product_list_displayed
     # 'More' button will be displayed, click on 'More' button.
     category_page.click_on_more_button
-    
 end
 
 Given("I select the size, color and quantity") do
@@ -53,6 +52,7 @@ Given("I complete my order process until payment") do
     order_page.click_to_confirm_order
 end
 
+#needs review
 When("I click to proceed to checkout") do
     order_page.click_on_proceed_to_checkout_summary_step
     #Check if user is signed or not
@@ -68,7 +68,6 @@ end
 
 Then("I need to create an account or sign in to continue") do
     authentication_page.check_sign_in_step
-    #double check
 end
 
 Then("My buying process is completed") do

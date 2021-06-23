@@ -8,8 +8,31 @@ require 'capybara/rspec/matchers'
 require 'faker'
 require 'launchy'
 require 'site_prism'
+require 'yaml'
 
 include RSpec::Matchers
+
+#Setup data config
+module KnowsAboutConfig
+    def load_yaml_file
+        YAML.load_file(File.dirname(__FILE__) + "/../../config/config.yaml")
+    end
+
+    def base_url
+        @_config ||= load_yaml_file
+        @_config['website']['base_url']
+    end
+    def email
+        @_email ||= load_yaml_file
+        @_email['website']['credentials']['email']
+    end
+    def password
+        @_password ||= load_yaml_file
+        @_password['website']['credentials']['password']
+    end
+end
+
+include KnowsAboutConfig
 
 #Site Prism
 Capybara.register_driver :site_prism do |app|
@@ -23,5 +46,5 @@ Capybara.configure do |config|
 end
 
 Capybara.run_server = false
-Capybara.app_host = 'http://automationpractice.com'
+Capybara.app_host = base_url
 # Capybara.default_driver = :selenium

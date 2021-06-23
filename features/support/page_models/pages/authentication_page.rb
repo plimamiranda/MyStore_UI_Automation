@@ -6,12 +6,13 @@ module PageModels
 
         include RSpec::Matchers
         include Capybara::DSL
+        include KnowsAboutConfig
 
         set_url '/index.php?controller=authentication&back=my-account'
 
         #Login information / Already Registered
-        element :email, '#email'
-        element :password, '#passwd'
+        element :email_address, '#email'
+        element :password_login, '#passwd'
         element :lost_password, '.lost_password.form-group'
         element :sign_in_button, '#SubmitLogin'
         element :login, '.login'
@@ -21,15 +22,24 @@ module PageModels
         element :create_account_button, '#SubmitCreate'
         element :valid_email_form, 'div.form-group.form-ok'
         element :invalid_email_form, 'div.form-group.form-error'
+        element :invalid_email_address, 'div.alert.alert-danger'
         
-        def perform_login
-            sign_in_with_valid_email
-            sign_in_with_valid_password
+        def perform_login(email,password)
+            sign_in_with_valid_email(email)
+            sign_in_with_valid_password(password)
             click_on_sign_in_btn
         end
 
-        def sign_in_with_valid_email
-            email.set('validEmail').send_keys [:tab]
+        def sign_in_with_valid_email(email)
+            email_address.set(email).send_keys [:tab]
+        end
+
+        def try_sign_in_with_invalid_email(invalid_email)
+            password_login.set(invalid_email).send_keys [:tab]
+        end
+
+        def check_invalid_email_warning_message(warning_message)
+            expect(page).to have_selector 'div.alert.alert-danger'
         end
 
         def enter_valid_email_to_create_account
@@ -40,8 +50,8 @@ module PageModels
              expect(page).to have_selector 'div.form-group.form-ok'
         end
 
-        def sign_in_with_valid_password
-            password.set('validpassword').send_keys [:tab]
+        def sign_in_with_valid_password(password)
+            password_login.set(password).send_keys [:tab]
         end
 
         def click_on_create_account_btn

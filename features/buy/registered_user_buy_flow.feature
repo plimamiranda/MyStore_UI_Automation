@@ -7,7 +7,7 @@ Feature: Customer buying Products from My Store
         Background:
             Given I am signed in
     
-        @buy
+        @buy @smoke @regression
         Scenario: Registered user buying products - Happy Path
             Given I choose a product that I want to buy
               And I select the size, color and quantity

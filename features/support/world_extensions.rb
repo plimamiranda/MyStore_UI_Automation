@@ -47,3 +47,4 @@ module KnowsMyWorld
 end
 
 World(KnowsMyWorld)
+World(KnowsAboutConfig)
