@@ -35,7 +35,7 @@ module PageModels
         end
 
         def try_sign_in_with_invalid_email(invalid_email)
-            password_login.set(invalid_email).send_keys [:tab]
+            email_address.set(invalid_email).send_keys [:tab]
         end
 
         def check_invalid_email_warning_message(warning_message)
@@ -66,8 +66,8 @@ module PageModels
         end
 
         def check_sign_in_step
-            expect(page).to have_selector('#create-account_form')
-            expect(page).to have_selector('#login_form')
+            expect(page).to have_selector('#create-account_form.box')
+            expect(page).to have_selector('#login_form.box')
         end
 
     end

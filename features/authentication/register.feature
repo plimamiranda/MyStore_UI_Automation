@@ -7,7 +7,7 @@ Feature: Register a new My Store user
             Given I am a guest user
 
         @register
-        Scenario: Succesfull new user Registration
+        Scenario: Succesful new user Registration
             Given I am on the Authentication page
              When I enter a valid email address to create an account
               And I click on Create an account

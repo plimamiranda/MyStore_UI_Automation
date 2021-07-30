@@ -8,14 +8,15 @@ Feature: Sign into MyStore
               And I am on the Authentication page
 
         @sign_in
-        Scenario: Successful sign in
+        Scenario: Successful sign in with valid email and valid password
              When I enter valid sign in credentials
               And I click on sign in button
              Then I am successfully signed in
 
         @sign_in_negative
-        Scenario Outline: Unsuccessful sign in with invalid email address
+        Scenario Outline: Unsuccessful sign in with invalid email address and valid password
             Given I enter an <invalid_email>
+              And a valid password
              When I click on sign in button
              Then the following <warning_message> is displayed
               And login is not completed
@@ -31,8 +32,9 @@ Feature: Sign into MyStore
                   | special_chars@_£$%#_domain.com | There is 1 error Invalid email address. |
 
         @sign_in_negative
-        Scenario Outline: Unsuccessful sign in with empty email field
+        Scenario Outline: Unsuccessful sign in with empty email field and valid password
             Given I enter no email address
+              And a valid password
              When I click on sign in button
              Then the following <warning_message> is displayed
         Examples:
@@ -40,7 +42,7 @@ Feature: Sign into MyStore
                   | An email address required. |
 
         @sign_in_negative_password
-        Scenario Outline: Unsuccessful sign in with invalid password
+        Scenario Outline: Unsuccessful sign in with valid email and invalid password
             Given I enter a <valid_email>
               And I enter an <invalid_password>
              When I click on sign in button
